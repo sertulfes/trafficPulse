@@ -1,59 +1,92 @@
-Smart Route Planner
+TrafficPulse
+TrafficPulse is a Flask-based web application that compares multiple driving routes between two locations. It analyzes distance, travel time, estimated CO2 emissions, accident risk score, and overall route performance. The application uses the OpenRouteService (ORS) API for geocoding, autocomplete, road snapping, and alternative route generation.
 
-Overview
-Smart Route Planner is a Flask-based web application that calculates optimized driving routes between two locations. It compares alternative routes and provides information about distance, travel time, estimated CO2 emissions, accident risk estimate, and an overall route score. The application uses the OpenRouteService (ORS) API for geocoding, autocomplete, snapping, and routing.
+Features
+Multiple alternative driving routes
+
+Distance and travel time comparison
+
+Estimated CO2 emissions analysis
+
+Accident risk scoring
+
+Overall route performance scoring
+
+Expandable turn-by-turn directions
+
+Location autocomplete
+
+Road snapping for accurate routing
 
 Requirements
-
-Python 3.9 or newer installed
+Python 3.9 or higher
 
 Internet connection
 
-An OpenRouteService (ORS) API key
+OpenRouteService API key
 
-How To Create an OpenRouteService Account and Get an API Key
-
+Setting Up OpenRouteService API Key
 Go to 
 
-Click “Sign Up” and create a free account.
+Create a free account
 
-After verifying your email and logging in, go to the Dashboard.
+Verify your email and log in
 
-Create a new API key.
+Open the Dashboard
 
-Copy the generated API key.
+Generate a new API key
 
-Open app.py and replace: ORS_API_KEY = "YOUR_API_KEY_HERE" with your actual key inside the quotes. Save the file.
+Open app.py
 
-How To Run (First Time Setup)
+Replace: ORS_API_KEY = "YOUR_API_KEY_HERE"
 
-Open Command Prompt.
+Paste your key inside the quotes and save
 
-Navigate to the project folder: cd path\to\smart-routing
+First Time Setup
+Open Command Prompt (Windows) or Terminal (Mac).
 
-Create a virtual environment: python -m venv venv
+Navigate to the project folder:
+cd path/to/smart-routing
 
-Activate the virtual environment (Windows): venv\Scripts\activate
+Create a virtual environment:
+python -m venv venv (Windows)
+python3 -m venv venv (Mac)
 
-Install required libraries: pip install -r requirements.txt
+Activate the virtual environment:
+Windows: venv\Scripts\activate
+Mac: source venv/bin/activate
 
-Run the application: python app.py
+Install dependencies:
+pip install -r requirements.txt
 
-Open your browser and go to: 
+Run the application:
+Windows: python app.py
+Mac: python3 app.py
 
-How To Run After Initial Setup
+Open your browser and go to:
 
-Open Command Prompt.
+Running After Initial Setup
+Navigate to the project folder.
 
-Navigate to the project folder: cd path\to\smart-routing
+Activate the virtual environment.
 
-Activate the virtual environment: venv\Scripts\activate
+Run python app.py (or python3 app.py on Mac).
 
-Run the application: python app.py
-
-Open  in your browser
+Open  in your browser.
 
 Troubleshooting
-If you see errors about missing modules, run: pip install -r requirements.txt
-If the virtual environment becomes corrupted, delete the venv folder and repeat the first time setup steps.
-Ensure your ORS_API_KEY in app.py is valid and correctly pasted without extra spaces.
+If you see a missing module error, run:
+pip install -r requirements.txt
+
+If the virtual environment becomes corrupted, delete the venv folder and repeat the First Time Setup steps.
+
+Project Structure
+app.py – Main Flask application
+
+templates/ – HTML templates
+
+requirements.txt – Python dependencies
+
+README.md – Project documentation
+
+TrafficPulse demonstrates API integration, backend route processing, frontend interactivity, and environmental impact modeling within a structured Flask application.
