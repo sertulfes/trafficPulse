@@ -1,22 +1,24 @@
-TrafficPulse **This only works with Canadian places
-TrafficPulse is a Flask-based web application that compares multiple driving routes between two locations. It analyzes distance, travel time, estimated CO2 emissions, accident risk score, and overall route performance. The application uses the OpenRouteService (ORS) API for geocoding, autocomplete, road snapping, and alternative route generation. In the HTML page, enter start and end, and it will give you 1-3 routes depending on distance with statistics on CO2, accident risk, and travel time. Click on a route to see full driving instructions.
+TrafficPulse
+TrafficPulse is a Flask-based web application that compares multiple driving routes between two Canadian locations. It analyzes distance, travel time, estimated CO2 emissions, and overall route performance. The app uses the OpenRouteService (ORS) API for geocoding, autocomplete, road snapping, and route generation.
+
+Enter a start and end location to receive 1–3 route options depending on trip distance. Each route displays travel time, distance, emissions data, percentage difference in CO2 compared to the most efficient route, and a performance score. Click any route to expand full turn‑by‑turn driving instructions.
 
 Features
-Multiple alternative driving routes
+Multiple alternative routes (short trips)
 
 Distance and travel time comparison
 
 Estimated CO2 emissions analysis
 
-Accident risk scoring
+Emissions percentage comparison
 
-Overall route performance scoring
+Dynamic route performance scoring
 
 Expandable turn-by-turn directions
 
 Location autocomplete
 
-Road snapping for accurate routing
+Road snapping for improved routing accuracy
 
 Requirements
 Python 3.9 or higher
@@ -25,7 +27,7 @@ Internet connection
 
 OpenRouteService API key
 
-Setting Up OpenRouteService API Key
+Setting Up Your OpenRouteService API Key
 Go to 
 
 Create a free account
@@ -38,50 +40,55 @@ Generate a new API key
 
 Open app.py
 
-Replace: ORS_API_KEY = "YOUR_API_KEY_HERE"
+Replace the ORS_API_KEY value with your key
 
-Paste your key inside the quotes and save
+Save the file
 
-First Time Setup
-Open Command Prompt (Windows) or Terminal (Mac).
+How to Run (Automatic Setup)
+TrafficPulse includes a run.py file that automatically:
+
+Creates a virtual environment if one does not exist
+
+Installs all dependencies from requirements.txt
+
+Starts the Flask application
+
+To Run:
+Open Command Prompt (Windows) or Terminal (Mac)
 
 Navigate to the project folder:
-cd path/to/smart-routing
 
-Create a virtual environment:
-python -m venv venv (Windows)
-python3 -m venv venv (Mac)
+cd path/to/TrafficPulse
 
-Activate the virtual environment:
-Windows: venv\Scripts\activate
-Mac: source venv/bin/activate
+Run:
 
-Install dependencies:
-pip install -r requirements.txt
-
-Run the application:
-Windows: python app.py
-Mac: python3 app.py
+Windows: python run.py
+Mac: python3 run.py
 
 Open your browser and go to:
 
-Running After Initial Setup
-Navigate to the project folder.
 
-Activate the virtual environment.
+That’s it. No manual virtual environment setup or pip installation required.
 
-Run python app.py (or python3 app.py on Mac).
+Running Again Later
+Simply navigate to the project folder and run:
 
-Open  in your browser.
+Windows: python run.py
+Mac: python3 run.py
+
+The script will reuse the existing virtual environment.
 
 Troubleshooting
-If you see a missing module error, run:
-pip install -r requirements.txt
+If Python is not recognized, ensure Python is installed and added to PATH.
 
-If the virtual environment becomes corrupted, delete the venv folder and repeat the First Time Setup steps.
+If routing fails, confirm your ORS API key is valid and has remaining usage quota.
+
+If you encounter persistent dependency issues, delete the venv folder and run python run.py again.
 
 Project Structure
-app.py – Main Flask application
+run.py – Automatic setup and launcher
+
+app.py – Main Flask backend logic
 
 templates/ – HTML templates
 
@@ -89,4 +96,4 @@ requirements.txt – Python dependencies
 
 README.md – Project documentation
 
-TrafficPulse demonstrates API integration, backend route processing, frontend interactivity, and environmental impact modeling within a structured Flask application.
+TrafficPulse demonstrates API integration, backend route analytics, environmental impact modeling, and interactive route comparison within a structured Flask application.
