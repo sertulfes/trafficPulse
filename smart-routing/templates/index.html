@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Smart Route Planner</title>
+
+    <style>
+        body { font-family: Arial; padding: 30px; }
+
+        .route-box {
+            border: 1px solid #ccc;
+            padding: 15px;
+            margin-bottom: 15px;
+            cursor: pointer;
+        }
+
+        .route-box:hover {
+            background: #f9f9f9;
+        }
+
+        .details {
+            display: none;
+            margin-top: 15px;
+        }
+
+        .eco-best {
+            color: green;
+            font-weight: bold;
+        }
+    </style>
+
+    <script>
+        function toggleDetails(id) {
+            const el = document.getElementById(id);
+            el.style.display = el.style.display === "none" ? "block" : "none";
+        }
+
+        async function fetchSuggestions(inputId, hiddenId) {
+            const query = document.getElementById(inputId).value;
+            if (query.length < 2) return;
+
+            const response = await fetch(`/autocomplete?q=${query}`);
+            const data = await response.json();
+
+            const list = document.getElementById(inputId + "-list");
+            list.innerHTML = "";
+
+            data.forEach(place => {
+                const option = document.createElement("div");
+                option.innerHTML = place.label;
+                option.onclick = () => {
+                    document.getElementById(inputId).value = place.label;
+                    document.getElementById(hiddenId).value = place.coords;
+                    list.innerHTML = "";
+                };
+                list.appendChild(option);
+            });
+        }
+    </script>
+</head>
+
+<body>
+
+<h1>🚗 Smart Route Planner</h1>
+
+<form method="POST" action="/route">
+    <h3>Start</h3>
+    <input id="start_input"
+           onkeyup="fetchSuggestions('start_input','start_coords')"
+           autocomplete="off" required>
+    <div id="start_input-list"></div>
+    <input type="hidden" name="start_coords" id="start_coords">
+
+    <h3>End</h3>
+    <input id="end_input"
+           onkeyup="fetchSuggestions('end_input','end_coords')"
+           autocomplete="off" required>
+    <div id="end_input-list"></div>
+    <input type="hidden" name="end_coords" id="end_coords">
+
+    <br><br>
+    <button type="submit">Find Routes</button>
+</form>
+
+{% if routes %}
+<h2>Route Options</h2>
+
+{% for route in routes %}
+<div class="route-box" onclick="toggleDetails('details{{loop.index}}')">
+
+    <h3>Route {{ route.route_number }}</h3>
+
+    <p><strong>Distance:</strong> {{ route.distance_km }} km</p>
+    <p><strong>Time:</strong> {{ route.travel_time_min }} minutes</p>
+
+    <p>
+        <strong>CO₂:</strong> {{ route.co2_kg }} kg
+        {% if route.co2_diff == 0 %}
+            <span class="eco-best">(Most Eco-Friendly)</span>
+        {% else %}
+            <br>
+            {{ route.co2_diff }} kg more than best
+            ({{ route.co2_percent }}% higher emissions)
+        {% endif %}
+    </p>
+
+    <p><strong>Risk Score:</strong> {{ route.risk_score }}</p>
+    <p><strong>Overall Score:</strong> {{ route.overall_score }}/100</p>
+
+    <div class="details" id="details{{loop.index}}">
+
+        <h4>Turn-by-Turn Directions:</h4>
+
+        <ol>
+        {% for step in route.steps %}
+            <li>{{ step.instruction }} ({{ (step.distance/1000)|round(2) }} km)</li>
+        {% endfor %}
+        </ol>
+
+    </div>
+
+</div>
+{% endfor %}
+
+{% endif %}
+
+</body>
+</html>
