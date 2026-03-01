@@ -1,4 +1,4 @@
-TrafficPulse
+TrafficPulse **This only works with Canadian places
 TrafficPulse is a Flask-based web application that compares multiple driving routes between two locations. It analyzes distance, travel time, estimated CO2 emissions, accident risk score, and overall route performance. The application uses the OpenRouteService (ORS) API for geocoding, autocomplete, road snapping, and alternative route generation.
 
 Features
